@@ -1,0 +1,25 @@
+.header__container {
+  position: relative;
+  top: 0;
+  z-index: 20;
+  padding: 16px 40px;
+  background-color: #FCFBFB;
+
+  h1 {
+    font-weight: normal;
+    font-size: 26px;
+  }
+}
+
+.header__sign-in-icon {
+  margin-right: 10px;
+}
+
+.header__sign-in-link {
+  color: #000;
+  transition: .3s;
+
+  &:hover {
+    color: #212121;
+  }
+}
