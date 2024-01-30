@@ -3,7 +3,7 @@ export enum URLS {
   Users_Route = '/users',
   User_Route = '/users/:id',
   Counter_Route = '/counter',
-  Input_Route = '/input',
+  Sign_In = '/start-forms/sign-in',
   Posts_Route = '/posts',
   Blogs_Route = '/blogs',
   Page_Not_Found_Route = '*'

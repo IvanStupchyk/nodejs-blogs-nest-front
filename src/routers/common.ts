@@ -3,6 +3,7 @@ import PostsPageContainer from '../containers/PostsPageContainer/PostsPageContai
 import NotFound from '../pages/NotFound/NotFound'
 import { URLS } from '../constants/apiRouter'
 import BlogsPageContainer from "../containers/BlogsPageContainer/BlogsPageContainer";
+import SignInPageContainer from "../containers/SignInPageContainer/SignInPageContainer";
 
 type RouteType = {
   path: string
@@ -32,6 +33,13 @@ const BLOGS_PAGE: RouteType = {
   isAuth: false,
 }
 
+const SIGN_IN_PAGE: RouteType = {
+  path: URLS.Sign_In,
+  id: URLS.Sign_In,
+  component: SignInPageContainer,
+  isAuth: false,
+}
+
 
 const NOT_FOUND_PAGE: RouteType = {
   path: URLS.Page_Not_Found_Route,
@@ -44,5 +52,6 @@ export const ALL_ROUTES = [
   HOME_PAGE,
   POSTS_PAGE,
   BLOGS_PAGE,
+  SIGN_IN_PAGE,
   NOT_FOUND_PAGE,
 ]
