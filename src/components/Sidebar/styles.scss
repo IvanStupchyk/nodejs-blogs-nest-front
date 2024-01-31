@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.navigation__container {
+  margin-right: 20px;
+  padding-top: 88px;
+  padding-left: 40px;
+  max-width: 252px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: #FCFBFB;
+  box-sizing: border-box;
+  height: -webkit-fill-available;
+  min-height: 100vh;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.navigation__element {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  border-radius: 8px;
+  transition: .3s;
+  color: black;
+  box-sizing: border-box;
+
+  &.active {
+    color: $mainPink;
+
+    .navigation__element_highlight {
+      animation: .6s ease-out 0s both running highlight;
+    }
+  }
+}
+
+.navigation__element_highlight {
+  opacity: 0;
+  width: 2px;
+  height: 42px;
+  background-color: $mainPink;
+}
+
+@keyframes highlight {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
