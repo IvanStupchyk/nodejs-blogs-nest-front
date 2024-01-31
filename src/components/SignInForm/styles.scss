@@ -27,6 +27,20 @@
   justify-content: end;
 }
 
+.sign_in_form__login_warning {
+  display: block;
+  color: #fc0044;
+}
+
+.sign_in_form__login_warning_container {
+  margin-top: 15px;
+  height: 25px;
+}
+
+.sign_in_form__spinner_container {
+  height: 25px;
+}
+
 .sign_in_form__sign_up_label {
   font-size: 16px;
   color: #797476;

@@ -1,0 +1,19 @@
+@import "../../styles/variables";
+
+.registration_form__container_global {
+  margin-top: 30px;
+}
+
+.registration_form__container {
+  padding: 30px 40px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 6px 0 rgb(215, 215, 220);
+  border-radius: 4px;
+  max-width: 430px;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.hide_style {
+    opacity: .6;
+  }
+}

@@ -1,0 +1,40 @@
+.confirm_code__container {
+  letter-spacing: 0.4px;
+}
+
+.confirm_code__title {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.confirm_code__message {
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+}
+
+.confirm_code__text_container {
+  max-width: 300px;
+  width: 100%;
+}
+
+.confirm_code__send_button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #f31853;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 18px 0 rgba(248, 52, 107, 0.35);
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ff0044;
+  }
+}
+
+.confirm_code__illustration_container {
+  max-width: 473px;
+  width: 100%;
+}

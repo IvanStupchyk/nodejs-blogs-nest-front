@@ -1,36 +1,33 @@
-import React from 'react';
-import './styles.scss'
-import {URLS} from "../../constants/apiRouter";
+import React, {Dispatch, SetStateAction} from 'react';
 import {Link} from "react-router-dom";
+
+// COMPONENTS, RESOURCES, CONSTANTS
+import {URLS} from "../../constants/apiRouter";
+import './styles.scss'
 import {Button, Container, TextField, Typography} from "@mui/material";
+import spinner from "../../assets/loaders/spinner.svg";
 
-
-const SignInForm = () => {
-    const [login, setLogin] = React.useState<string>('');
-    const [password, setPassword] = React.useState<string>('');
-
-    const [loginError, setLoginError] = React.useState<string>('');
-    const [passwordError, setPasswordError] = React.useState<string>('');
-
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
-
-        if (!login) {
-            setLoginError('Enter login');
-        } else {
-            setLoginError('');
-        }
-
-        if (!password) {
-            setPasswordError('Enter password');
-        } else {
-            setPasswordError('');
-        }
-
-        if (login && password) {
-            console.log('data', { login, password });
-        }
-    };
+type SignInFormProps = {
+    handleSubmit: (event: React.FormEvent) => void
+    login: string
+    password: string
+    passwordError: string
+    loginError: string
+    setLogin: Dispatch<SetStateAction<string>>
+    setPassword: Dispatch<SetStateAction<string>>
+    status: string
+}
+const SignInForm = (props: SignInFormProps) => {
+    const {
+        handleSubmit,
+        login,
+        password,
+        loginError,
+        passwordError,
+        setLogin,
+        setPassword,
+        status
+    } = props
 
     return (
     <div className="sign_in_form__container">
@@ -76,14 +73,29 @@ const SignInForm = () => {
                         Forgot Password
                     </Link>
                 </div>
+
+                <div className='sign_in_form__login_warning_container'>
+                    {
+                        status === 'rejected' &&
+                        <p className='sign_in_form__login_warning'>
+                            Wrong login or password
+                        </p>
+                    }
+                    {
+                        status === 'pending' &&
+                        <img src={spinner} className='sign_in_form__spinner_container' alt='spinner icon'/>
+                    }
+                </div>
+
                 <Button
                     type="submit"
                     variant="contained"
                     color="primary"
+                    disabled={status === 'pending'}
                     fullWidth
                     style={{
                         backgroundColor: '#F8346B',
-                        marginTop: '40px',
+                        marginTop: '10px',
                     }}
                 >
                     Sign In
@@ -92,7 +104,7 @@ const SignInForm = () => {
         </Container>
         <div className='df-column-center margin-top-20'>
             <p className='sign_in_form__sign_up_label margin-btm-20'>Don't have an account?</p>
-            <Link to={URLS.Sign_In} className='sign_in_form__sign_up_link'>
+            <Link to={URLS.Registration} className='sign_in_form__sign_up_link'>
                 Sign Up
             </Link>
         </div>
@@ -100,4 +112,4 @@ const SignInForm = () => {
     );
 }
 
-export default SignInForm;
+export default React.memo(SignInForm);

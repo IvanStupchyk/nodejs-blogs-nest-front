@@ -3,7 +3,9 @@ import PostsPageContainer from '../containers/PostsPageContainer/PostsPageContai
 import NotFound from '../pages/NotFound/NotFound'
 import { URLS } from '../constants/apiRouter'
 import BlogsPageContainer from "../containers/BlogsPageContainer/BlogsPageContainer";
-import SignInPageContainer from "../containers/SignInPageContainer/SignInPageContainer";
+import SignInFormContainer from "../containers/SignInPageContainer/SignInPageContainer";
+import RegistrationFormContainer from "../containers/RegistrationFormContainer/RegistrationFormContainer";
+import EmailConfirmPopupContainer from "../containers/EmailConfirmContainer/EmailConfirmContainer";
 
 type RouteType = {
   path: string
@@ -36,7 +38,21 @@ const BLOGS_PAGE: RouteType = {
 const SIGN_IN_PAGE: RouteType = {
   path: URLS.Sign_In,
   id: URLS.Sign_In,
-  component: SignInPageContainer,
+  component: SignInFormContainer,
+  isAuth: false,
+}
+
+const REGISTRATION_PAGE: RouteType = {
+  path: URLS.Registration,
+  id: URLS.Registration,
+  component: RegistrationFormContainer,
+  isAuth: false,
+}
+
+const EMAIL_CONFIRM_PAGE: RouteType = {
+  path: URLS.Registration_confirm,
+  id: URLS.Registration_confirm,
+  component: EmailConfirmPopupContainer,
   isAuth: false,
 }
 
@@ -53,5 +69,7 @@ export const ALL_ROUTES = [
   POSTS_PAGE,
   BLOGS_PAGE,
   SIGN_IN_PAGE,
+  REGISTRATION_PAGE,
+  EMAIL_CONFIRM_PAGE,
   NOT_FOUND_PAGE,
 ]

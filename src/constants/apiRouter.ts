@@ -1,8 +1,7 @@
 export enum URLS {
   Home_Route = '/',
-  Users_Route = '/users',
-  User_Route = '/users/:id',
-  Counter_Route = '/counter',
+  Registration = '/start-forms/registration',
+  Registration_confirm = '/start-forms/registration-confirmation',
   Sign_In = '/start-forms/sign-in',
   Posts_Route = '/posts',
   Blogs_Route = '/blogs',
