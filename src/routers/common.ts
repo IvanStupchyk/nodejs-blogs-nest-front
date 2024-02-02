@@ -6,6 +6,8 @@ import BlogsPageContainer from "../containers/BlogsPageContainer/BlogsPageContai
 import SignInFormContainer from "../containers/SignInPageContainer/SignInPageContainer";
 import RegistrationFormContainer from "../containers/RegistrationFormContainer/RegistrationFormContainer";
 import EmailConfirmPopupContainer from "../containers/EmailConfirmContainer/EmailConfirmContainer";
+import PasswordRecoveryContainer from "../containers/PasswordRecoveryContainer/PasswordRecoveryContainer";
+import ForgotPasswordContainer from "../containers/ForgotPasswordContainer/ForgotPasswordContainer";
 
 type RouteType = {
   path: string
@@ -56,6 +58,19 @@ const EMAIL_CONFIRM_PAGE: RouteType = {
   isAuth: false,
 }
 
+const PASSWORD_RECOVERY_PAGE: RouteType = {
+  path: URLS.Password_recovery,
+  id: URLS.Password_recovery,
+  component: PasswordRecoveryContainer,
+  isAuth: false,
+}
+
+const FORGOT_PASSWORD_PAGE: RouteType = {
+  path: URLS.Forgot_password,
+  id: URLS.Forgot_password,
+  component: ForgotPasswordContainer,
+  isAuth: false,
+}
 
 const NOT_FOUND_PAGE: RouteType = {
   path: URLS.Page_Not_Found_Route,
@@ -71,5 +86,7 @@ export const ALL_ROUTES = [
   SIGN_IN_PAGE,
   REGISTRATION_PAGE,
   EMAIL_CONFIRM_PAGE,
+  PASSWORD_RECOVERY_PAGE,
+  FORGOT_PASSWORD_PAGE,
   NOT_FOUND_PAGE,
 ]

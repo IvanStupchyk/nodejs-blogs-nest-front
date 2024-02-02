@@ -8,8 +8,7 @@ import {useActions} from "../../hooks/useActions";
 const SignInFormContainer = () => {
     const [loginUser, { status,isSuccess, error, data: authResponse }] = useLoginUserMutation()
     const { loginUserAC } = useActions()
-    console.log('status', status)
-    console.log('error', error)
+
     const [login, setLogin] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
 
