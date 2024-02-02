@@ -2,19 +2,34 @@ import React from 'react'
 
 // COMPONENTS, RESOURCES, CONSTANTS
 import {Header} from "../../components";
-import {useLocation} from "react-router-dom";
+import {useAppSelector} from "../../store/storeToolkit";
+import {useLogoutMutation} from "../../services/auth.api";
+import {useActions} from "../../hooks/useActions";
+import {lsKeys} from "../../constants/constants";
 
 const HeaderContainer = () => {
-    const [showSignInLink, setShowSignInLink] = React.useState<boolean>(true)
-    const location  = useLocation()
+    const isAuth = useAppSelector((state) => state.auth.isAuth)
+    const [logout, { isSuccess }] = useLogoutMutation()
+    const { logoutUserAC } = useActions()
 
-    // React.useEffect(() => {
-    //     setShowSignInLink(location.pathname.includes('start-forms'))
-    // }, [location.pathname])
+
+    const handleLogout = React.useCallback(() => {
+        if (isAuth) {
+            logout()
+        }
+    }, [isAuth])
+
+    React.useEffect(() => {
+        if (isSuccess) {
+            logoutUserAC()
+            localStorage.removeItem(lsKeys.AccessToken)
+        }
+    }, [isSuccess])
 
     return (
         <Header
-            showSignInLink={showSignInLink}
+            isAuth={isAuth}
+            handleLogout={handleLogout}
         />
     )
 }

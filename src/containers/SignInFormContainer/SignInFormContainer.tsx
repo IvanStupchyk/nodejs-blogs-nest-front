@@ -4,10 +4,17 @@ import React from 'react'
 import {SignInForm} from "../../components";
 import {useLoginUserMutation} from "../../services/auth.api";
 import {useActions} from "../../hooks/useActions";
+import {lsKeys} from "../../constants/constants";
+import {jwtDecode} from "jwt-decode";
+import {URLS} from "../../constants/apiRouter";
+import {useNavigate} from "react-router-dom";
+import {JwtPayloadType} from "../../types/general";
 
 const SignInFormContainer = () => {
-    const [loginUser, { status,isSuccess, error, data: authResponse }] = useLoginUserMutation()
-    const { loginUserAC } = useActions()
+    const navigation = useNavigate()
+
+    const [loginUser, { status, isSuccess, data: authResponse }] = useLoginUserMutation()
+    const { loginUserAC, setOwnUserDataAC } = useActions()
 
     const [login, setLogin] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
@@ -40,12 +47,24 @@ const SignInFormContainer = () => {
 
     React.useEffect(() => {
         if (isSuccess && authResponse) {
-            localStorage.setItem('accessToken', authResponse.accessToken)
-            loginUserAC({
-                authStatement: true
-            })
+            try {
+                const decodedToken = jwtDecode(authResponse.accessToken ?? '') as JwtPayloadType
+
+                localStorage.setItem(lsKeys.AccessToken, authResponse.accessToken)
+                loginUserAC({
+                    authStatement: true
+                })
+                setOwnUserDataAC({
+                    userId: decodedToken.sub,
+                    login: decodedToken.login,
+                    email: decodedToken.email
+                })
+                navigation(URLS.Home_Route)
+            } catch (e) {
+                console.log('--------CAN NOT LOG IN----------')
+            }
         }
-    }, [isSuccess])
+    }, [isSuccess, authResponse])
 
     return (
         <SignInForm
