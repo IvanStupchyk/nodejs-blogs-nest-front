@@ -69,7 +69,7 @@ const SignInForm = (props: SignInFormProps) => {
                     helperText={passwordError}
                 />
                 <div className='sign_in_form__forgot_link_container'>
-                    <Link to={URLS.Sign_In} className='sign_in_form__forgot_link'>
+                    <Link to={URLS.Forgot_password} className='sign_in_form__forgot_link'>
                         Forgot Password
                     </Link>
                 </div>

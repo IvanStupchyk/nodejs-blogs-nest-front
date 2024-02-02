@@ -1,4 +1,6 @@
 import React, {Dispatch, SetStateAction} from 'react';
+
+// COMPONENTS, RESOURCES, CONSTANTS
 import './styles.scss'
 import {URLS} from "../../constants/apiRouter";
 import {Link} from "react-router-dom";
@@ -9,7 +11,7 @@ import {
     Typography
 } from "@mui/material";
 import spinner from "../../assets/loaders/spinner.svg";
-import RegistrationPopup from "../../components/ReristrationPopup/RegistrationPopup";
+import GeneralPopup from "../../components/GeneralPopup/GeneralPopup";
 
 type RegistrationFormPageProps = {
     handleSubmit: (event: React.FormEvent) => void
@@ -53,10 +55,11 @@ const RegistrationFormPage = (props: RegistrationFormPageProps) => {
 
     return (
         <div className="registration_form__container_global width-all df-center">
-            <RegistrationPopup
-                openRegistrationPopup={openRegistrationPopup}
-                email={email}
-                closeRegistrationPopup={closeRegistrationPopup}
+            <GeneralPopup
+                openPopup={openRegistrationPopup}
+                title={'Email sent'}
+                message={`We have sent a link to confirm your email to ${email}`}
+                closePopup={closeRegistrationPopup}
             />
             <div className={`registration_form__container ${status === 'pending' && 'hide_style'}`}>
                 <Container component="main" maxWidth="xs">

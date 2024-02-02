@@ -9,39 +9,44 @@ import {
 } from "@mui/material";
 
 type RegistrationPopupPropsType = {
-    openRegistrationPopup: boolean
-    closeRegistrationPopup: () => void
-    email: string
+    openPopup: boolean
+    closePopup: () => void
+    title: string
+    message: string
 }
-const RegistrationPopup = (props: RegistrationPopupPropsType) => {
-    const {openRegistrationPopup, closeRegistrationPopup, email} = props
+const GeneralPopup = (props: RegistrationPopupPropsType) => {
+    const {
+        openPopup,
+        closePopup,
+        title,
+        message
+    } = props
 
     return (
         <Dialog
-            open={openRegistrationPopup}
-            onClose={closeRegistrationPopup}
+            open={openPopup}
+            onClose={closePopup}
         >
             <div style={{padding: '15px'}}>
                 <DialogTitle>
-                    Email sent
+                    {title}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        We have sent a link to confirm your email to {email}
+                        {message}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        onClick={closeRegistrationPopup}
+                        onClick={closePopup}
                         style={{backgroundColor: '#f31853', color: '#fff'}}
                     >
                         OK
                     </Button>
                 </DialogActions>
             </div>
-
         </Dialog>
     );
 };
 
-export default React.memo(RegistrationPopup)
+export default React.memo(GeneralPopup)

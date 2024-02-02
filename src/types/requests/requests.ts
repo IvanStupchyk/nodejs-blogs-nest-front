@@ -20,3 +20,8 @@ export type EmailConfirmRequestPayload = {
 export type ResendConfirmCodeRequestPayload = {
     email: string,
 }
+
+export type ChangePasswordRequestPayload = {
+    recoveryCode: string,
+    newPassword: string,
+}

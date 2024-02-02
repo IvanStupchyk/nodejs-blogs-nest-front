@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import {BaseQueryError, BaseQueryMeta, BaseQueryResult} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
 import {
+  ChangePasswordRequestPayload,
   EmailConfirmRequestPayload,
   LoginRequestPayload,
   LoginRequestResponse, ResendConfirmCodeRequestPayload,
@@ -46,6 +47,7 @@ export const authApi = createApi({
         body,
       })
     }),
+
     EmailConfirm: builder.mutation<any, EmailConfirmRequestPayload>({
       query: (body) => ({
         url: 'registration-confirmation',
@@ -61,6 +63,22 @@ export const authApi = createApi({
         body,
       })
     }),
+
+    SendRecoveryPasswordLink: builder.mutation<any, ResendConfirmCodeRequestPayload>({
+      query: (body) => ({
+        url: 'password-recovery',
+        method: 'POST',
+        body,
+      })
+    }),
+
+    ChangePassword: builder.mutation<any, ChangePasswordRequestPayload>({
+      query: (body) => ({
+        url: 'new-password',
+        method: 'POST',
+        body,
+      })
+    }),
   }),
 })
 
@@ -69,5 +87,7 @@ export const {
   useLoginUserMutation,
   useUserRegistrationMutation,
   useEmailConfirmMutation,
-  useResendConfirmCodeMutation
+  useResendConfirmCodeMutation,
+  useSendRecoveryPasswordLinkMutation,
+  useChangePasswordMutation
 } = authApi
