@@ -10,7 +10,7 @@ import {URLS} from "../../constants/apiRouter";
 const RegistrationFormContainer = () => {
     const [
         userRegistration,
-        { status, isSuccess, data, isError,  error }]
+        { status, isSuccess,  error }]
         = useUserRegistrationMutation()
 
     const navigation = useNavigate()

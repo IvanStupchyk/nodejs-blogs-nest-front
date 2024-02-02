@@ -7,6 +7,10 @@ export type LoginRequestPayload = {
     password: string,
 }
 
+export type RefreshTokenRequestResponse = {
+    accessToken: string
+}
+
 export type UserRegistrationRequestPayload = {
     login: string,
     password: string,
