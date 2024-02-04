@@ -6,6 +6,7 @@ export enum URLS {
   Forgot_password = '/start-forms/forgot-password',
   Sign_In = '/start-forms/sign-in',
   Posts_Route = '/posts',
+  Profile_settings = '/profile-settings',
   Blogs_Route = '/blogs',
   Page_Not_Found_Route = '*'
 }
