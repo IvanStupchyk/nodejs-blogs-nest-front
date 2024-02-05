@@ -57,7 +57,8 @@ const SignInFormContainer = () => {
                 setOwnUserDataAC({
                     userId: decodedToken.sub,
                     login: decodedToken.login,
-                    email: decodedToken.email
+                    email: decodedToken.email,
+                    deviceId: decodedToken.deviceId
                 })
                 navigation(URLS.Home_Route)
             } catch (e) {

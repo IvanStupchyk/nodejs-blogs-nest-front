@@ -26,8 +26,12 @@ const App = () => {
 
     return <div className="App">
         <HeaderContainer/>
-        <Routing/>
-        <Sidebar/>
+        <div className='df'>
+            <div className='navigation__mock_container'>
+                <Sidebar/>
+            </div>
+            <Routing/>
+        </div>
     </div>
 }
 
