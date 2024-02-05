@@ -1,0 +1,43 @@
+.device__container {
+  margin: 10px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  width: 100%;
+  box-shadow: 0 1px 2px 0 #1D21261A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  //box-shadow: 0px 5px 20px 0px #1D212608;
+
+}
+
+.device__browser_img_container {
+  margin-right: 15px;
+  height: 36px;
+  width: 36px;
+}
+
+.device__title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.device__ip {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.device__status {
+  color: #3677F7;
+}
+
+.device__terminate_session_btn {
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

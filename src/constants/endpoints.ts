@@ -8,4 +8,5 @@ export enum Endpoints {
     PasswordRecovery = 'password-recovery',
     NewPassword = 'new-password',
     MyData = 'me',
+    Devices = 'devices'
 }
