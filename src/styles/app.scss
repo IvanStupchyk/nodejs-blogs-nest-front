@@ -222,6 +222,10 @@
   padding: 10px;
 }
 
+.padding-20 {
+  padding: 20px;
+}
+
 .btn-block {
   display: block;
   width: 100%;
@@ -231,4 +235,33 @@ a.link-disabled {
   opacity: 0.7;
   cursor: not-allowed !important;
   border: 1px solid #e1e4e9 !important;
+}
+
+.general_btn {
+  padding: 7px 20px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #f31853;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 9px 0 rgba(248, 52, 107, 0.35);
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    background-color: #ff0606;
+  }
+
+  &:disabled {
+    opacity: .6;
+    cursor: not-allowed !important;
+    pointer-events: none;
+  }
+}
+
+.general_input {
+  padding: 5px 10px;
+  border: 1px #b7b7b7 solid;
+  border-radius: 4px;
 }

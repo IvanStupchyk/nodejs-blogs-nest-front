@@ -29,3 +29,9 @@ export type ChangePasswordRequestPayload = {
     recoveryCode: string,
     newPassword: string,
 }
+
+export type BlogCreateRequestPayload = {
+    name: string;
+    description: string;
+    websiteUrl: string;
+};
