@@ -9,6 +9,7 @@ import EmailConfirmPopupContainer from "../containers/EmailConfirmContainer/Emai
 import PasswordRecoveryContainer from "../containers/PasswordRecoveryContainer/PasswordRecoveryContainer";
 import ForgotPasswordContainer from "../containers/ForgotPasswordContainer/ForgotPasswordContainer";
 import ProfileSettingsPageContainer from "../containers/ProfileSettingsPageContainer/ProfileSettingsPageContainer";
+import CreateElementsPageContainer from "../containers/CreateElementsPageContainer/CreateElementsPageContainer";
 
 type RouteType = {
   path: string
@@ -80,6 +81,13 @@ const PROFILE_SETTINGS_PAGE: RouteType = {
   isAuth: false,
 }
 
+const CREATE_ELEMENTS_PAGE: RouteType = {
+  path: URLS.Create_Elements_Route,
+  id: URLS.Create_Elements_Route,
+  component: CreateElementsPageContainer,
+  isAuth: false,
+}
+
 const NOT_FOUND_PAGE: RouteType = {
   path: URLS.Page_Not_Found_Route,
   id: URLS.Page_Not_Found_Route,
@@ -97,5 +105,6 @@ export const ALL_ROUTES = [
   PASSWORD_RECOVERY_PAGE,
   FORGOT_PASSWORD_PAGE,
   PROFILE_SETTINGS_PAGE,
+  CREATE_ELEMENTS_PAGE,
   NOT_FOUND_PAGE,
 ]
