@@ -1,14 +1,17 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 // COMPONENTS, RESOURCES, CONSTANTS
-import {useCreateBlogMutation} from "../../services/blogs.api";
+import {
+    useLazyGetBlogQuery,
+    useUpdateBlogMutation
+} from "../../services/blogs.api";
 import {websiteUrlRegex} from "../../constants/constants";
 import ModifyBlog from "../../components/ModifyBlog/ModifyBlog";
-import {URLS} from "../../constants/apiRouter";
 
-const CreateBlogContainer = () => {
-    const [createBlog, { status,  error, isSuccess }] = useCreateBlogMutation()
+const UpdateBlogContainer = () => {
+    const [updateBlog, { status,  error }] = useUpdateBlogMutation()
+    const [getBlog, { data }] = useLazyGetBlogQuery()
 
     const [name, setName] = React.useState<string>('');
     const [description, setDescription] = React.useState<string>('');
@@ -18,6 +21,8 @@ const CreateBlogContainer = () => {
     const [descriptionError, setDescriptionError] = React.useState<string>('')
     const [websiteUrlError, setWebsiteUrlError] = React.useState<string>('')
     const [serverError, setServerError] = React.useState<string>('')
+
+    const params = useParams()
 
     const navigate = useNavigate()
 
@@ -30,6 +35,14 @@ const CreateBlogContainer = () => {
             setServerError(error.data?.errorsMessages[0]?.message)
         }
     }
+
+    React.useMemo(() => {
+        if (data) {
+            setName(data.name)
+            setDescription(data.description)
+            setWebsiteUrl(data.websiteUrl)
+        }
+    }, [data])
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault()
@@ -57,7 +70,8 @@ const CreateBlogContainer = () => {
         }
 
         if (name && description && websiteUrl && isValid) {
-            createBlog({
+            updateBlog({
+                id: params?.id ?? '',
                 name,
                 description,
                 websiteUrl
@@ -65,30 +79,37 @@ const CreateBlogContainer = () => {
         }
     }
 
+    const handeBackNavigation = () => {
+        navigate(-1)
+    }
+
     React.useEffect(() => {
-        if (isSuccess) {
-            navigate(URLS.Blogs_Route)
-        }
-    }, [isSuccess])
+        getBlog(params?.id ?? '')
+    }, [params])
 
     return (
-        <ModifyBlog
-            title='Create Blog'
-            buttonTitle='Create'
-            handleSubmit={handleSubmit}
-            name={name}
-            description={description}
-            websiteUrl={websiteUrl}
-            status={status}
-            serverError={serverError}
-            setName={setName}
-            setDescription={setDescription}
-            setWebsiteUrl={setWebsiteUrl}
-            nameError={nameError}
-            descriptionError={descriptionError}
-            websiteUrlError={websiteUrlError}
-        />
+        <div className='padding-20'>
+            <div className='df-start' style={{cursor: 'pointer'}} onClick={handeBackNavigation}>
+                {"<"}-- Back
+            </div>
+            <ModifyBlog
+                title='Update Blog'
+                buttonTitle='Update'
+                handleSubmit={handleSubmit}
+                name={name}
+                description={description}
+                websiteUrl={websiteUrl}
+                status={status}
+                serverError={serverError}
+                setName={setName}
+                setDescription={setDescription}
+                setWebsiteUrl={setWebsiteUrl}
+                nameError={nameError}
+                descriptionError={descriptionError}
+                websiteUrlError={websiteUrlError}
+            />
+        </div>
     );
 };
 
-export default React.memo(CreateBlogContainer)
+export default React.memo(UpdateBlogContainer)

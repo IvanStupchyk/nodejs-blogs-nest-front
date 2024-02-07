@@ -1,44 +1,52 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import {BlogType} from "../../types/general";
 import {blogsApi} from "../../services/blogs.api";
 
 type InitialStateType = {
-  blogs: BlogType[]
+    blogs: BlogType[]
+    pagesCount: number
+    page: number
+    pageSize: number
+    totalCount: number
 }
 
 const initialState: InitialStateType = {
-  blogs: []
+    blogs: [],
+    pagesCount: 0,
+    page: 1,
+    pageSize: 10,
+    totalCount: 0
 }
 
 export const blogSlice = createSlice({
   name: 'blogs',
   initialState,
   reducers: {
-    setBlogsAC(state, action: PayloadAction<BlogType[]>) {
-      state.blogs = action.payload
-    }
+
   },
 
   extraReducers: (builder) => {
-    builder.addMatcher(
-        blogsApi.endpoints?.createBlog.matchFulfilled,
-        (state,  { payload} ) => {
-          console.log('payload', payload)
-          console.log('state.blogs', state.blogs)
+      builder.addMatcher(
+          blogsApi.endpoints?.getBlogs.matchFulfilled,
+          (state,  { payload} ) => {
 
-          //@ts-ignore
-          // state.blogs = state.blogs.push(payload)
-          state.blogs = payload
-        }
-    );
+              state.blogs = payload.items
+              state.pagesCount = payload.pagesCount
+              state.page = payload.page
+              state.pageSize = payload.pageSize
+              state.totalCount = payload.totalCount
+          }
+      );
 
-    // builder.addMatcher(
-    //     devicesApi.endpoints?.deleteAllDevices.matchFulfilled,
-    //     (state,  {payload} ) => {
-    //       //@ts-ignore
-    //       state.devices = state.devices.filter(d => d.deviceId === payload.id)
-    //     }
-    // )
+      builder.addMatcher(
+          blogsApi.endpoints?.deleteBlog.matchFulfilled,
+          (state,  { payload} ) => {
+
+              //@ts-ignore
+              state.blogs = state.blogs.filter(b => b.id !== payload.id)
+              state.totalCount = --state.totalCount
+          }
+      );
   },
 })
 

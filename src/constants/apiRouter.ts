@@ -8,6 +8,7 @@ export enum URLS {
   Posts_Route = '/posts',
   Profile_settings = '/profile-settings',
   Blogs_Route = '/blogs',
+  Blog_Edit_Route = '/blogs/:id',
   Create_Elements_Route = '/create-elements',
   Page_Not_Found_Route = '*'
 }
