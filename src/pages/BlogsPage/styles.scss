@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.blog__container {
+  margin: 20px 0;
+  padding: 20px;
+  color: black;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 1px 1px 6px 0 rgb(215, 215, 220);
+  max-width: 378px;
+  width: 100%;
+  box-sizing: border-box;
+}

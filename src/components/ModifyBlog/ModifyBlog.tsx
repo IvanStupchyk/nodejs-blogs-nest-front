@@ -3,6 +3,8 @@ import {Button, TextField} from "@mui/material";
 import spinner from "../../assets/loaders/spinner.svg";
 
 type CreateBlogPropsType = {
+    title: string
+    buttonTitle: string
     handleSubmit: (event: any) => void
     name: string
     description: string
@@ -17,7 +19,7 @@ type CreateBlogPropsType = {
     websiteUrlError: string
 }
 
-const CreateBlog = (props: CreateBlogPropsType) => {
+const ModifyBlog = (props: CreateBlogPropsType) => {
     const {
         handleSubmit,
         name,
@@ -30,12 +32,14 @@ const CreateBlog = (props: CreateBlogPropsType) => {
         setWebsiteUrl,
         nameError,
         descriptionError,
-        websiteUrlError
+        websiteUrlError,
+        title,
+        buttonTitle
     } = props
 
     return (
         <div className='padding-20' style={{width: '300px'}}>
-            <h2 className='margin-btm-20'>Create Blog</h2>
+            <h2 className='margin-btm-20'>{title}</h2>
             <form onSubmit={handleSubmit}>
                 <TextField
                     label="Name"
@@ -104,11 +108,11 @@ const CreateBlog = (props: CreateBlogPropsType) => {
                         marginTop: '10px',
                     }}
                 >
-                    Create
+                    {buttonTitle}
                 </Button>
             </form>
         </div>
     );
 };
 
-export default React.memo(CreateBlog)
+export default React.memo(ModifyBlog)

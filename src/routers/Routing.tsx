@@ -3,11 +3,13 @@ import { Routes, Route } from 'react-router-dom'
 
 // COMPONENTS, RESOURCES, CONSTANTS
 import { ALL_ROUTES } from './common'
+import {useAppSelector} from "../store/storeToolkit";
 
 const Routing = () => {
-  const isAuth = false
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
 
-  const allLegalRoutes = ALL_ROUTES.filter((rt) => rt.isAuth === isAuth)
+  const allLegalRoutes = ALL_ROUTES
+      .filter((rt) => rt.isAuth ? rt.isAuth === isAuth : true)
 
   return (
     <Routes>

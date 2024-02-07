@@ -35,3 +35,11 @@ export type BlogCreateRequestPayload = {
     description: string;
     websiteUrl: string;
 };
+
+export type BlogUpdateRequestPayload = {
+    id: string
+    name: string;
+    description: string;
+    websiteUrl: string;
+};
+

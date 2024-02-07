@@ -10,6 +10,7 @@ import PasswordRecoveryContainer from "../containers/PasswordRecoveryContainer/P
 import ForgotPasswordContainer from "../containers/ForgotPasswordContainer/ForgotPasswordContainer";
 import ProfileSettingsPageContainer from "../containers/ProfileSettingsPageContainer/ProfileSettingsPageContainer";
 import CreateElementsPageContainer from "../containers/CreateElementsPageContainer/CreateElementsPageContainer";
+import UpdateBlogContainer from "../containers/UpdateBlogContainer/UpdateBlogContainer";
 
 type RouteType = {
   path: string
@@ -36,7 +37,14 @@ const BLOGS_PAGE: RouteType = {
   path: URLS.Blogs_Route,
   id: URLS.Blogs_Route,
   component: BlogsPageContainer,
-  isAuth: false,
+  isAuth: true,
+}
+
+const BLOG_EDIT_PAGE: RouteType = {
+  path: URLS.Blog_Edit_Route,
+  id: URLS.Blog_Edit_Route,
+  component: UpdateBlogContainer,
+  isAuth: true,
 }
 
 const SIGN_IN_PAGE: RouteType = {
@@ -106,5 +114,6 @@ export const ALL_ROUTES = [
   FORGOT_PASSWORD_PAGE,
   PROFILE_SETTINGS_PAGE,
   CREATE_ELEMENTS_PAGE,
+  BLOG_EDIT_PAGE,
   NOT_FOUND_PAGE,
 ]
