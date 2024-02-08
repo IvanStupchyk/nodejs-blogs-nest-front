@@ -5,36 +5,46 @@ import spinner from "../../assets/loaders/spinner.svg";
 type CreateBlogPropsType = {
     title: string
     buttonTitle: string
+    firstTitle: string
+    secondTitle: string
+    thirdTitle: string
     handleSubmit: (event: any) => void
-    name: string
-    description: string
-    websiteUrl: string
+    firstInputValue: string
+    secondInputValue: string
+    thirdInputValue: string
     status: string
     serverError: string | undefined
-    setName: Dispatch<SetStateAction<string>>
-    setDescription: Dispatch<SetStateAction<string>>
-    setWebsiteUrl: Dispatch<SetStateAction<string>>
-    nameError: string
-    descriptionError: string
-    websiteUrlError: string
+    setFirstInputValue: Dispatch<SetStateAction<string>>
+    setSecondInputValue: Dispatch<SetStateAction<string>>
+    setThirdInputValue: Dispatch<SetStateAction<string>>
+    firstInputValueError: string
+    secondInputValueError: string
+    thirdInputValueError: string
+    isCreatePostButton?: boolean
+    openCreatePostPage?: () => void
 }
 
-const ModifyBlog = (props: CreateBlogPropsType) => {
+const BlogPostForm = (props: CreateBlogPropsType) => {
     const {
         handleSubmit,
-        name,
-        description,
-        websiteUrl,
+        firstInputValue,
+        secondInputValue,
+        thirdInputValue,
         status,
         serverError,
-        setName,
-        setDescription,
-        setWebsiteUrl,
-        nameError,
-        descriptionError,
-        websiteUrlError,
+        setFirstInputValue,
+        setSecondInputValue,
+        setThirdInputValue,
+        firstInputValueError,
+        secondInputValueError,
+        thirdInputValueError,
         title,
-        buttonTitle
+        buttonTitle,
+        firstTitle,
+        secondTitle,
+        thirdTitle,
+        isCreatePostButton,
+        openCreatePostPage
     } = props
 
     return (
@@ -42,7 +52,7 @@ const ModifyBlog = (props: CreateBlogPropsType) => {
             <h2 className='margin-btm-20'>{title}</h2>
             <form onSubmit={handleSubmit}>
                 <TextField
-                    label="Name"
+                    label={firstTitle}
                     variant="standard"
                     required
                     fullWidth
@@ -50,13 +60,13 @@ const ModifyBlog = (props: CreateBlogPropsType) => {
                         marginBottom: '20px',
                         height: '50px'
                     }}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    error={!!nameError}
-                    helperText={nameError}
+                    value={firstInputValue}
+                    onChange={(e) => setFirstInputValue(e.target.value)}
+                    error={!!firstInputValueError}
+                    helperText={firstInputValueError}
                 />
                 <TextField
-                    label="Description"
+                    label={secondTitle}
                     variant="standard"
                     required
                     fullWidth
@@ -64,13 +74,13 @@ const ModifyBlog = (props: CreateBlogPropsType) => {
                         marginBottom: '20px',
                         height: '50px'
                     }}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    error={!!descriptionError}
-                    helperText={descriptionError}
+                    value={secondInputValue}
+                    onChange={(e) => setSecondInputValue(e.target.value)}
+                    error={!!secondInputValueError}
+                    helperText={secondInputValueError}
                 />
                 <TextField
-                    label="Website Url"
+                    label={thirdTitle}
                     variant="standard"
                     required
                     fullWidth
@@ -78,10 +88,10 @@ const ModifyBlog = (props: CreateBlogPropsType) => {
                         marginBottom: '20px',
                         height: '50px'
                     }}
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                    error={!!websiteUrlError}
-                    helperText={websiteUrlError}
+                    value={thirdInputValue}
+                    onChange={(e) => setThirdInputValue(e.target.value)}
+                    error={!!thirdInputValueError}
+                    helperText={thirdInputValueError}
                 />
 
                 <div className='sign_in_form__login_warning_container'>
@@ -106,13 +116,33 @@ const ModifyBlog = (props: CreateBlogPropsType) => {
                     style={{
                         backgroundColor: '#F8346B',
                         marginTop: '10px',
+                        marginBottom: '10px'
                     }}
                 >
                     {buttonTitle}
                 </Button>
+
+                {
+                    isCreatePostButton &&
+                  <>
+                    <span>or</span>
+                    <Button
+                      onClick={openCreatePostPage}
+                      variant="contained"
+                      color="primary"
+                      disabled={status === 'pending'}
+                      fullWidth
+                      style={{
+                          marginTop: '10px',
+                      }}
+                    >
+                      Create Post
+                    </Button>
+                  </>
+                }
             </form>
         </div>
     );
 };
 
-export default React.memo(ModifyBlog)
+export default React.memo(BlogPostForm)

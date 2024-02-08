@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 // COMPONENTS, RESOURCES, CONSTANTS
 import {useCreateBlogMutation} from "../../services/blogs.api";
 import {websiteUrlRegex} from "../../constants/constants";
-import ModifyBlog from "../../components/ModifyBlog/ModifyBlog";
+import ModifyBlog from "../../components/BlogPostForm/BlogPostForm";
 import {URLS} from "../../constants/apiRouter";
 
 const CreateBlogContainer = () => {
@@ -75,18 +75,21 @@ const CreateBlogContainer = () => {
         <ModifyBlog
             title='Create Blog'
             buttonTitle='Create'
+            firstTitle='Name'
+            secondTitle='Description'
+            thirdTitle='Website Url'
             handleSubmit={handleSubmit}
-            name={name}
-            description={description}
-            websiteUrl={websiteUrl}
+            firstInputValue={name}
+            secondInputValue={description}
+            thirdInputValue={websiteUrl}
             status={status}
             serverError={serverError}
-            setName={setName}
-            setDescription={setDescription}
-            setWebsiteUrl={setWebsiteUrl}
-            nameError={nameError}
-            descriptionError={descriptionError}
-            websiteUrlError={websiteUrlError}
+            setFirstInputValue={setName}
+            setSecondInputValue={setDescription}
+            setThirdInputValue={setWebsiteUrl}
+            firstInputValueError={nameError}
+            secondInputValueError={descriptionError}
+            thirdInputValueError={websiteUrlError}
         />
     );
 };

@@ -22,11 +22,13 @@ const BlogsPage = (props: BlogsPagePropsType) => {
         {
             blogs.length ?
                 blogs.map(b => {
-                    return <Link
-                        key={b.id}
-                        to={`${URLS.Blogs_Route}/${b.id}`}
-                        className='blog__container'
-                    >
+                    return <div className='blog__container' key={b.id}>
+                        <Link
+                            to={`${URLS.Blogs_Route}/${b.id}`}
+                            style={{
+                                color: '#000'
+                            }}
+                        >
                             <div className='df margin-btm-20'>
                                 <span className='margin-right-10'>Name:</span>
                                 <span>{b.name}</span>
@@ -41,15 +43,14 @@ const BlogsPage = (props: BlogsPagePropsType) => {
                                     {b.websiteUrl}
                                 </span>
                             </div>
-                            <div className='df'>
-                                <div
-                                    onClick={() => handleDeleteBlog(b.id)}
-                                    className='general_btn'
-                                >
-                                    Delete
-                                </div>
-                            </div>
-                    </Link>
+                        </Link>
+                        <div
+                            onClick={() => handleDeleteBlog(b.id)}
+                            className='general_btn'
+                        >
+                            Delete
+                        </div>
+                    </div>
                 }) : ''
         }
     </div>

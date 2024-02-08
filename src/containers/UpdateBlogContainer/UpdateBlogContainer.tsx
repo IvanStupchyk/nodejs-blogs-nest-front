@@ -7,7 +7,7 @@ import {
     useUpdateBlogMutation
 } from "../../services/blogs.api";
 import {websiteUrlRegex} from "../../constants/constants";
-import ModifyBlog from "../../components/ModifyBlog/ModifyBlog";
+import ModifyBlog from "../../components/BlogPostForm/BlogPostForm";
 
 const UpdateBlogContainer = () => {
     const [updateBlog, { status,  error }] = useUpdateBlogMutation()
@@ -41,6 +41,12 @@ const UpdateBlogContainer = () => {
             setName(data.name)
             setDescription(data.description)
             setWebsiteUrl(data.websiteUrl)
+        }
+    }, [data])
+
+    const openCreatePostPage = React.useCallback(() => {
+        if (data) {
+            navigate(`/posts/${data.id}/create`)
         }
     }, [data])
 
@@ -95,18 +101,23 @@ const UpdateBlogContainer = () => {
             <ModifyBlog
                 title='Update Blog'
                 buttonTitle='Update'
+                firstTitle='Name'
+                secondTitle='Description'
+                thirdTitle='Website Url'
                 handleSubmit={handleSubmit}
-                name={name}
-                description={description}
-                websiteUrl={websiteUrl}
+                firstInputValue={name}
+                secondInputValue={description}
+                thirdInputValue={websiteUrl}
                 status={status}
                 serverError={serverError}
-                setName={setName}
-                setDescription={setDescription}
-                setWebsiteUrl={setWebsiteUrl}
-                nameError={nameError}
-                descriptionError={descriptionError}
-                websiteUrlError={websiteUrlError}
+                setFirstInputValue={setName}
+                setSecondInputValue={setDescription}
+                setThirdInputValue={setWebsiteUrl}
+                firstInputValueError={nameError}
+                secondInputValueError={descriptionError}
+                thirdInputValueError={websiteUrlError}
+                isCreatePostButton={true}
+                openCreatePostPage={openCreatePostPage}
             />
         </div>
     );
