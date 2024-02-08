@@ -11,6 +11,8 @@ import ForgotPasswordContainer from "../containers/ForgotPasswordContainer/Forgo
 import ProfileSettingsPageContainer from "../containers/ProfileSettingsPageContainer/ProfileSettingsPageContainer";
 import CreateElementsPageContainer from "../containers/CreateElementsPageContainer/CreateElementsPageContainer";
 import UpdateBlogContainer from "../containers/UpdateBlogContainer/UpdateBlogContainer";
+import CreatePostContainer from "../containers/CreatePostContainer/CreatePostContainer";
+import PostContainer from "../containers/PostContainer/PostContainer";
 
 type RouteType = {
   path: string
@@ -44,6 +46,20 @@ const BLOG_EDIT_PAGE: RouteType = {
   path: URLS.Blog_Edit_Route,
   id: URLS.Blog_Edit_Route,
   component: UpdateBlogContainer,
+  isAuth: true,
+}
+
+const POST_PAGE: RouteType = {
+  path: URLS.Post_Route,
+  id: URLS.Post_Route,
+  component: PostContainer,
+  isAuth: true,
+}
+
+const POST_CREATE_PAGE: RouteType = {
+  path: URLS.Post_Create_Route,
+  id: URLS.Post_Create_Route,
+  component: CreatePostContainer,
   isAuth: true,
 }
 
@@ -115,5 +131,7 @@ export const ALL_ROUTES = [
   PROFILE_SETTINGS_PAGE,
   CREATE_ELEMENTS_PAGE,
   BLOG_EDIT_PAGE,
+  POST_PAGE,
+  POST_CREATE_PAGE,
   NOT_FOUND_PAGE,
 ]

@@ -1,3 +1,5 @@
+import {likeStatus} from "../../../constants/constants";
+
 export type LoginRequestResponse = {
     accessToken: string
 }
@@ -43,3 +45,38 @@ export type BlogUpdateRequestPayload = {
     websiteUrl: string;
 };
 
+export type PostLikeRequestPayload = {
+    id: string;
+    likeStatus: likeStatus
+};
+
+
+export type CreatePostRequestPayload = {
+    blogId: string
+    title: string
+    shortDescription: string
+    content: string
+};
+
+export type UpdatePostRequestPayload = {
+    blogId: string
+    postId: string
+    title: string
+    shortDescription: string
+    content: string
+};
+
+export type DeletePostRequestPayload = {
+    blogId: string
+    postId: string
+};
+
+export type CreateCommentRequestPayload = {
+    postId: string
+    content: string
+};
+
+export type UpdateCommentRequestPayload = {
+    commentId: string
+    content: string
+};

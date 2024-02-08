@@ -7,11 +7,19 @@ import {devicesApi} from "../services/devices.api";
 import {deviceReducer} from "./devices/device.slice";
 import {blogsApi} from "../services/blogs.api";
 import {blogReducer} from "./blogs/blogs.slice";
+import {postsApi} from "../services/posts.api";
+import {postReducer} from "./posts/posts.slice";
+import {commentsApi} from "../services/comments.api";
+import {commentReducer} from "./comments/comments.slice";
 
 export const Store = configureStore({
   reducer: {
     [blogsApi.reducerPath]: blogsApi.reducer,
     blogs: blogReducer,
+    [postsApi.reducerPath]: postsApi.reducer,
+    posts: postReducer,
+    [commentsApi.reducerPath]: commentsApi.reducer,
+    comments: commentReducer,
     [devicesApi.reducerPath]: devicesApi.reducer,
     devices: deviceReducer,
     [authApi.reducerPath]: authApi.reducer,
@@ -19,7 +27,9 @@ export const Store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(blogsApi.middleware)
+    .concat(postsApi.middleware)
     .concat(devicesApi.middleware)
+    .concat(commentsApi.middleware)
     .concat(authApi.middleware)
 })
 

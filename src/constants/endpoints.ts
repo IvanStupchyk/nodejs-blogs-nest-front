@@ -9,5 +9,6 @@ export enum Endpoints {
     NewPassword = 'new-password',
     MyData = 'me',
     Devices = 'devices',
-    Blogs = 'blogs'
+    Blogs = 'blogs',
+    Posts = 'posts'
 }

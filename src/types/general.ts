@@ -1,4 +1,4 @@
-import {SubscriptionStatus} from "../constants/constants";
+import {likeStatus, SubscriptionStatus} from "../constants/constants";
 
 export type JwtPayloadType = {
     sub: string
@@ -46,26 +46,73 @@ export type BlogsViewType = {
     items: Array<BlogType>;
 };
 
-type UserViewType = {
-    userId: string | null;
-    userLogin: string | null;
+type PostLikeUserInfoType = {
+    addedAt: string;
+    userId: string;
+    login: string;
 };
 
-type BlogViewSAType = {
+type ExtendedLikesInfoViewType = {
+    likesCount: number;
+    dislikesCount: number;
+    myStatus: likeStatus;
+    newestLikes: Array<PostLikeUserInfoType>;
+};
+
+export type PostImageViewType = {
+    main: ImageType[] | null;
+};
+
+export type PostViewType = {
     id: string;
-    name: string;
-    description: string;
-    websiteUrl: string;
+    title: string;
+    shortDescription: string;
+    content: string;
     createdAt: Date;
-    isMembership: boolean;
-    banInfo: BanInfoType;
-    blogOwnerInfo: UserViewType;
-};
+    blogId: string;
+    blogName: string;
+    images: PostImageViewType;
+    extendedLikesInfo: ExtendedLikesInfoViewType;
+}
 
-export type BlogsViewSAType = {
+export type PostsType = {
     pagesCount: number;
     page: number;
     pageSize: number;
     totalCount: number;
-    items: Array<BlogViewSAType>;
+    items: Array<PostViewType>;
 };
+
+
+
+export type CommentatorInfoType = {
+    userId: string;
+    userLogin: string;
+};
+
+export type CommentLikesViewType = {
+    likesCount: number;
+    dislikesCount: number;
+    myStatus: likeStatus;
+};
+
+export type CommentViewType = {
+    id: string;
+    content: string;
+    commentatorInfo: CommentatorInfoType;
+    likesInfo: CommentLikesViewType;
+    createdAt: Date;
+};
+
+export type CommentsViewType = {
+    pagesCount: number;
+    page: number;
+    pageSize: number;
+    totalCount: number;
+    items: Array<CommentViewType>;
+};
+
+
+
+
+
