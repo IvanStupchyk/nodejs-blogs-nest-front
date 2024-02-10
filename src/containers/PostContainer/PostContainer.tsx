@@ -2,83 +2,64 @@ import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 
 // COMPONENTS, RESOURCES, CONSTANTS
-import {useLazyGetPostQuery} from "../../services/posts.api";
+import {useLazyGetPostQuery, useLikePostMutation} from "../../services/posts.api";
 import {useAppSelector} from "../../store/storeToolkit";
-import {useLazyGetPostCommentsQuery} from "../../services/comments.api";
+import {
+    useCreateCommentMutation, useDeleteCommentMutation,
+    useLazyGetPostCommentsQuery,
+    useLikeCommentMutation
+} from "../../services/comments.api";
+import Post from "../../components/Post/Post";
+import {PostLikeUserInfoType} from "../../types/general";
+import {likeStatus} from "../../constants/constants";
+import Comments from "../../components/Comments/Comments";
 
 const PostContainer = () => {
-    // const [updateBlog, { status,  error }] = useUpdateBlogMutation()
     const [getPost] = useLazyGetPostQuery()
     const [getComments] = useLazyGetPostCommentsQuery()
+    const [likePost] = useLikePostMutation()
+    const [likeComment] = useLikeCommentMutation()
+    const [createComment, {isSuccess}] = useCreateCommentMutation()
+    const [deleteComment] = useDeleteCommentMutation()
 
     const post = useAppSelector((state) => state.posts.post)
     const commentsInfo = useAppSelector((state) => state.comments)
-    console.log('commentsInfo', commentsInfo)
-    console.log('post', post)
-    const [serverError, setServerError] = React.useState<string>('')
+    const userId = useAppSelector((state) => state.auth.userId)
+
+    const [commentText, setCommentText] = React.useState<string>('')
 
     const params = useParams()
 
     const navigate = useNavigate()
 
-    // if (error && !serverError.length && 'status' in error){
-    //     // @ts-ignore
-    //     if (!error.data?.errorsMessages) {
-    //         setServerError( JSON.stringify(error.data) ?? '')
-    //     } else {
-    //         // @ts-ignore
-    //         setServerError(error.data?.errorsMessages[0]?.message)
-    //     }
-    // }
+    const changePostLikeStatus = (likeStatus: likeStatus) => {
+        likePost({
+            id: params.id ?? '',
+            likeStatus
+        })
+    }
 
-    // React.useMemo(() => {
-    //     if (data) {
-    //         setName(data.name)
-    //         setDescription(data.description)
-    //         setWebsiteUrl(data.websiteUrl)
-    //     }
-    // }, [data])
+    const addComment = React.useCallback(() => {
+        createComment({
+            postId: params?.id ?? '',
+            content: commentText
+        })
+    }, [params, commentText])
 
-    // const openCreatePostPage = React.useCallback(() => {
-    //     if (data) {
-    //         navigate(`/posts/${data.id}/create`)
-    //     }
-    // }, [data])
+    const changeCommentLikeStatus = React.useCallback((likeStatus: likeStatus, commentId: string) => {
+        likeComment({
+            id: commentId,
+            likeStatus
+        })
+    }, [])
 
-    // const handleSubmit = (event: React.FormEvent) => {
-    //     event.preventDefault()
-    //     let isValid = true
-    //
-    //     if (name.length < 1 || name.length > 15) {
-    //         setNameError('The number of characters must be from 1 to 15')
-    //         isValid = false
-    //     } else {
-    //         setNameError('')
-    //     }
-    //
-    //     if (description.length < 1 || description.length > 500) {
-    //         setDescriptionError('The number of characters must be from 1 to 500')
-    //         isValid = false
-    //     } else {
-    //         setDescriptionError('')
-    //     }
-    //
-    //     if (websiteUrl.length < 1 || !websiteUrlRegex.test(websiteUrl)) {
-    //         setWebsiteUrlError('It should be url')
-    //         isValid = false
-    //     } else {
-    //         setWebsiteUrlError('')
-    //     }
-    //
-    //     if (name && description && websiteUrl && isValid) {
-    //         updateBlog({
-    //             id: params?.id ?? '',
-    //             name,
-    //             description,
-    //             websiteUrl
-    //         })
-    //     }
-    // }
+    const newestLikesMemo = React.useMemo((): PostLikeUserInfoType[] => {
+        if (post) {
+            return post.extendedLikesInfo.newestLikes
+        }
+
+        return []
+    }, [post])
 
     const handeBackNavigation = () => {
         navigate(-1)
@@ -89,11 +70,42 @@ const PostContainer = () => {
         getComments(params?.id ?? '')
     }, [params])
 
+    React.useEffect(() => {
+        if (isSuccess) {
+            setCommentText('')
+        }
+    }, [isSuccess])
+
     return (
-        <div className='padding-20'>
+        <div className='padding-20 width-all'>
             <div className='df-start' style={{cursor: 'pointer'}} onClick={handeBackNavigation}>
-                {"<"}-- Back
+                {"<"}-- Back to posts
             </div>
+            {
+                post
+                    ? <Post
+                        blogName={post.blogName}
+                        postTitle={post.title}
+                        postContent={post.content}
+                        createdAt={post.createdAt}
+                        postLikeStatus={post.extendedLikesInfo.myStatus}
+                        dislikesCount={post.extendedLikesInfo.dislikesCount}
+                        likesCount={post.extendedLikesInfo.likesCount}
+                        newestLikes={newestLikesMemo}
+                        changePostLikeStatus={changePostLikeStatus}
+                    />
+                    : <div>Post not found</div>
+            }
+            <Comments
+                totalCount={commentsInfo.totalCount}
+                changeCommentLikeStatus={changeCommentLikeStatus}
+                comments={commentsInfo.comments}
+                addComment={addComment}
+                commentText={commentText}
+                setCommentText={setCommentText}
+                userId={userId}
+                deleteComment={deleteComment}
+            />
         </div>
     );
 };
