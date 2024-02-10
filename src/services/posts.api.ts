@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {lsKeys} from "../constants/constants";
+import {likeStatus, lsKeys} from "../constants/constants";
 import {PostsType, PostViewType} from "../types/general";
 import {
   CreatePostRequestPayload,
@@ -27,6 +27,9 @@ export const postsApi = createApi({
     getPost: builder.query<PostViewType, string>({
       query: (id: string) => ({
         url: `${Endpoints.Posts}/${id}`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem(lsKeys.AccessToken)}`
+        },
       }),
     }),
 
@@ -40,29 +43,20 @@ export const postsApi = createApi({
         body: {
           likeStatus: payload.likeStatus
         }
-      })
+      }),
+
+      transformResponse(baseQueryReturnValue: BaseQueryResult<any>, meta: BaseQueryMeta<any>, arg: any): Promise<{postId: string, likeStatus: likeStatus}> | any {
+        return {
+          postId: arg.id,
+          likeStatus: arg.likeStatus
+        }
+      }
     }),
 
     createPost: builder.mutation<PostViewType, CreatePostRequestPayload>({
       query: (payload: CreatePostRequestPayload) => ({
         url: `blogger/blogs/${payload.blogId}/posts`,
         method: 'POST',
-        headers: {
-          authorization: `Bearer ${localStorage.getItem(lsKeys.AccessToken)}`
-        },
-        body: {
-          title: payload.title,
-          shortDescription: payload.shortDescription,
-          content: payload.content,
-        }
-      })
-    }),
-
-
-    updatePost: builder.mutation<void, UpdatePostRequestPayload>({
-      query: (payload: UpdatePostRequestPayload) => ({
-        url: `blogger/blogs/${payload.blogId}/posts/${payload.postId}`,
-        method: 'PUT',
         headers: {
           authorization: `Bearer ${localStorage.getItem(lsKeys.AccessToken)}`
         },
@@ -97,6 +91,5 @@ export const {
     useLazyGetPostQuery,
     useLikePostMutation,
     useCreatePostMutation,
-    useUpdatePostMutation,
     useDeletePostMutation,
 } = postsApi

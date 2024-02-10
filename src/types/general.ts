@@ -46,7 +46,7 @@ export type BlogsViewType = {
     items: Array<BlogType>;
 };
 
-type PostLikeUserInfoType = {
+export type PostLikeUserInfoType = {
     addedAt: string;
     userId: string;
     login: string;

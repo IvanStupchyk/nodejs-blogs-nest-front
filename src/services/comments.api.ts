@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import {lsKeys} from "../constants/constants";
+import {likeStatus, lsKeys} from "../constants/constants";
 import {CommentsViewType, CommentViewType} from "../types/general";
 import {
   CreateCommentRequestPayload,
@@ -19,6 +19,9 @@ export const commentsApi = createApi({
     getPostComments: builder.query<CommentsViewType, string>({
       query: (id: string) => ({
         url: `${Endpoints.Posts}/${id}/comments`,
+        headers: {
+          authorization: `Bearer ${localStorage.getItem(lsKeys.AccessToken)}`
+        }
       }),
     }),
 
@@ -45,7 +48,14 @@ export const commentsApi = createApi({
         body: {
           likeStatus: payload.likeStatus
         }
-      })
+      }),
+
+      transformResponse(baseQueryReturnValue: BaseQueryResult<any>, meta: BaseQueryMeta<any>, arg: any): Promise<{commentId: string, likeStatus: likeStatus}> | any {
+        return {
+          commentId: arg.id,
+          likeStatus: arg.likeStatus
+        }
+      }
     }),
 
     updateComment: builder.mutation<void, UpdateCommentRequestPayload>({

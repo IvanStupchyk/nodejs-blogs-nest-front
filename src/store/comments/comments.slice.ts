@@ -39,12 +39,70 @@ export const commentSlice = createSlice({
       );
 
       builder.addMatcher(
+          commentsApi.endpoints?.likeComment.matchFulfilled, (state,  { payload} ) => {
+              //@ts-ignore
+              const initialComment = state.comments.find(c => c.id === payload.commentId)
+
+              if (initialComment) {
+                  const myStatus = initialComment.likesInfo.myStatus
+
+                  if (myStatus === 'None') {
+                      //@ts-ignore
+                      if (payload.likeStatus === 'Like') {
+                          initialComment.likesInfo.likesCount = ++initialComment.likesInfo.likesCount
+                      }
+                      //@ts-ignore
+                      if (payload.likeStatus === 'Dislike') {
+                          initialComment.likesInfo.dislikesCount = ++initialComment.likesInfo.dislikesCount
+                      }
+                  }
+
+                  if (myStatus === 'Dislike') {
+                      //@ts-ignore
+                      if (payload.likeStatus === 'None') {
+                          initialComment.likesInfo.dislikesCount = --initialComment.likesInfo.dislikesCount
+                      }
+                      //@ts-ignore
+                      if (payload.likeStatus === 'Like') {
+                          initialComment.likesInfo.dislikesCount = --initialComment.likesInfo.dislikesCount
+                          initialComment.likesInfo.likesCount = ++initialComment.likesInfo.likesCount
+                      }
+                  }
+
+                  if (myStatus === 'Like') {
+                      //@ts-ignore
+                      if (payload.likeStatus === 'None') {
+                          initialComment.likesInfo.likesCount = --initialComment.likesInfo.likesCount
+                      }
+                      //@ts-ignore
+                      if (payload.likeStatus === 'Dislike') {
+                          initialComment.likesInfo.dislikesCount = ++initialComment.likesInfo.dislikesCount
+                          initialComment.likesInfo.likesCount = --initialComment.likesInfo.likesCount
+                      }
+                  }
+
+                  //@ts-ignore
+                  initialComment.likesInfo.myStatus = payload.likeStatus
+              }
+          }
+      );
+
+      builder.addMatcher(
           commentsApi.endpoints?.deleteComment.matchFulfilled,
           (state,  { payload} ) => {
-
+                console.log('payload', payload)
               //@ts-ignore
-              state.comments = state.posts.filter(b => b.id !== payload.id)
+              state.comments = state.comments.filter(b => b.id !== payload.id)
               state.totalCount = --state.totalCount
+          }
+      );
+
+      builder.addMatcher(
+          commentsApi.endpoints?.createComment.matchFulfilled,
+          (state,  { payload} ) => {
+
+              state.comments.unshift(payload)
+              state.totalCount = ++state.totalCount
           }
       );
   },

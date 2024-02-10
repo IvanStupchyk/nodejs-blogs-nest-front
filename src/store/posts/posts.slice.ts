@@ -48,6 +48,48 @@ export const postSlice = createSlice({
       );
 
       builder.addMatcher(
+          postsApi.endpoints?.likePost.matchFulfilled, (state,  { payload} ) => {
+              if (state.post?.extendedLikesInfo.myStatus === 'None') {
+                  //@ts-ignore
+                  if (payload.likeStatus === 'Like') {
+                      state.post.extendedLikesInfo.likesCount = ++state.post.extendedLikesInfo.likesCount
+                  }
+                    //@ts-ignore
+                  if (payload.likeStatus === 'Dislike') {
+                      state.post.extendedLikesInfo.dislikesCount = ++state.post.extendedLikesInfo.dislikesCount
+                  }
+              }
+
+              if (state.post?.extendedLikesInfo.myStatus === 'Dislike') {
+                  //@ts-ignore
+                  if (payload.likeStatus === 'None') {
+                      state.post.extendedLikesInfo.dislikesCount = --state.post.extendedLikesInfo.dislikesCount
+                  }
+                  //@ts-ignore
+                  if (payload.likeStatus === 'Like') {
+                      state.post.extendedLikesInfo.dislikesCount = --state.post.extendedLikesInfo.dislikesCount
+                      state.post.extendedLikesInfo.likesCount = ++state.post.extendedLikesInfo.likesCount
+                  }
+              }
+
+              if (state.post?.extendedLikesInfo.myStatus === 'Like') {
+                  //@ts-ignore
+                  if (payload.likeStatus === 'None') {
+                      state.post.extendedLikesInfo.likesCount = --state.post.extendedLikesInfo.likesCount
+                  }
+                  //@ts-ignore
+                  if (payload.likeStatus === 'Dislike') {
+                      state.post.extendedLikesInfo.dislikesCount = ++state.post.extendedLikesInfo.dislikesCount
+                      state.post.extendedLikesInfo.likesCount = --state.post.extendedLikesInfo.likesCount
+                  }
+              }
+
+              //@ts-ignore
+              state.post.extendedLikesInfo.myStatus = payload.likeStatus
+          }
+      );
+
+      builder.addMatcher(
           postsApi.endpoints?.deletePost.matchFulfilled,
           (state,  { payload} ) => {
 

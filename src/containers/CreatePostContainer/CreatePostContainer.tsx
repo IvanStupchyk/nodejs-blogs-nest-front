@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 
 // COMPONENTS, RESOURCES, CONSTANTS
-import CreateBlog from "../../components/BlogPostForm/BlogPostForm";
+import CreatePost from "../../components/BlogPostForm/BlogPostForm";
 import {URLS} from "../../constants/apiRouter";
 import {useCreatePostMutation} from "../../services/posts.api";
 
@@ -74,10 +74,10 @@ const CreatePostContainer = () => {
     }, [isSuccess])
 
     return (
-        <CreateBlog
+        <CreatePost
             title='Create Post'
             buttonTitle='Create'
-            firstTitle='Post title'
+            firstTitle='post title'
             secondTitle='Short description'
             thirdTitle='Content'
             handleSubmit={handleSubmit}
