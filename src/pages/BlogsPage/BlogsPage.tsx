@@ -17,7 +17,7 @@ const BlogsPage = (props: BlogsPagePropsType) => {
     } = props
 
     return <div className="df-column-start padding-20">
-        <h1 style={{fontSize: '20px', marginBottom: '40px'}}>Blogs</h1>
+        <h1 style={{fontSize: '20px', marginBottom: '40px'}} className="font-bold underline">Blogs</h1>
         <p style={{marginBottom: '20px'}}>Total blogs: {totalCount}</p>
         {
             blogs.length ?
