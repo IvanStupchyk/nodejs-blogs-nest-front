@@ -1,0 +1,45 @@
+.comment__container {
+  padding: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color: #FCFBFB;
+  border-radius: 2px;
+  min-height: 140px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 24px;
+}
+
+.comment__date {
+  position: relative;
+  top: 1px;
+  margin-left: 10px;
+  color: #797476;
+  font-size: 12px;
+}
+
+.comment__likes_container {
+  position: absolute;
+  bottom: 10px;
+}
+
+.comment__add_field {
+  padding: 5px;
+  max-width: 300px;
+  width: 100%;
+  font-size: 12px;
+  border: 1px #e0e0e0 solid;
+  margin-right: 10px;
+  border-radius: 3px;
+  resize: none;
+}
+
+.comment__delete_btn {
+  position: absolute;
+  padding: 3px;
+  font-size: 12px;
+  right: 10px;
+  top: 10px;
+}

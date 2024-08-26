@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.scss'
 import manIllustration from "../../assets/images/man-illustration.png";
 
-
 type ConfirmCodePropsType = {
     handleReSendLink: () => void
 }

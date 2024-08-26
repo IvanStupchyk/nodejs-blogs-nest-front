@@ -21,8 +21,15 @@ const BLOGS: SideLinkType = {
   permission: ['ALL'],
 }
 
+const CREATE_ELEMENTS: SideLinkType = {
+  title: 'Create',
+  id: 'create_elements',
+  url: URLS.Create_Elements_Route,
+  permission: ['ALL'],
+}
 
 export const ASIDE_ROUTES = [
   BLOGS,
-  POSTS
+  POSTS,
+  CREATE_ELEMENTS
 ]

@@ -1,0 +1,43 @@
+.post__container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.post__blog_image_container {
+  height: 48px;
+  width: 48px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+.post__date {
+  color: #797476;
+  font-size: 12px;
+}
+
+.post__like_container {
+  margin-right: 5px;
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+
+.post__liker_container {
+  display: flex;
+  width: 150px;
+}
+
+.post__like_owner {
+  margin-right: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.post__image_container {
+  width: 100%;
+  height: 220px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}

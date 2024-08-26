@@ -8,6 +8,11 @@ import RegistrationFormContainer from "../containers/RegistrationFormContainer/R
 import EmailConfirmPopupContainer from "../containers/EmailConfirmContainer/EmailConfirmContainer";
 import PasswordRecoveryContainer from "../containers/PasswordRecoveryContainer/PasswordRecoveryContainer";
 import ForgotPasswordContainer from "../containers/ForgotPasswordContainer/ForgotPasswordContainer";
+import ProfileSettingsPageContainer from "../containers/ProfileSettingsPageContainer/ProfileSettingsPageContainer";
+import CreateElementsPageContainer from "../containers/CreateElementsPageContainer/CreateElementsPageContainer";
+import UpdateBlogContainer from "../containers/UpdateBlogContainer/UpdateBlogContainer";
+import CreatePostContainer from "../containers/CreatePostContainer/CreatePostContainer";
+import PostContainer from "../containers/PostContainer/PostContainer";
 
 type RouteType = {
   path: string
@@ -34,7 +39,28 @@ const BLOGS_PAGE: RouteType = {
   path: URLS.Blogs_Route,
   id: URLS.Blogs_Route,
   component: BlogsPageContainer,
-  isAuth: false,
+  isAuth: true,
+}
+
+const BLOG_EDIT_PAGE: RouteType = {
+  path: URLS.Blog_Edit_Route,
+  id: URLS.Blog_Edit_Route,
+  component: UpdateBlogContainer,
+  isAuth: true,
+}
+
+const POST_PAGE: RouteType = {
+  path: URLS.Post_Route,
+  id: URLS.Post_Route,
+  component: PostContainer,
+  isAuth: true,
+}
+
+const POST_CREATE_PAGE: RouteType = {
+  path: URLS.Post_Create_Route,
+  id: URLS.Post_Create_Route,
+  component: CreatePostContainer,
+  isAuth: true,
 }
 
 const SIGN_IN_PAGE: RouteType = {
@@ -72,6 +98,20 @@ const FORGOT_PASSWORD_PAGE: RouteType = {
   isAuth: false,
 }
 
+const PROFILE_SETTINGS_PAGE: RouteType = {
+  path: URLS.Profile_settings,
+  id: URLS.Profile_settings,
+  component: ProfileSettingsPageContainer,
+  isAuth: false,
+}
+
+const CREATE_ELEMENTS_PAGE: RouteType = {
+  path: URLS.Create_Elements_Route,
+  id: URLS.Create_Elements_Route,
+  component: CreateElementsPageContainer,
+  isAuth: false,
+}
+
 const NOT_FOUND_PAGE: RouteType = {
   path: URLS.Page_Not_Found_Route,
   id: URLS.Page_Not_Found_Route,
@@ -88,5 +128,10 @@ export const ALL_ROUTES = [
   EMAIL_CONFIRM_PAGE,
   PASSWORD_RECOVERY_PAGE,
   FORGOT_PASSWORD_PAGE,
+  PROFILE_SETTINGS_PAGE,
+  CREATE_ELEMENTS_PAGE,
+  BLOG_EDIT_PAGE,
+  POST_PAGE,
+  POST_CREATE_PAGE,
   NOT_FOUND_PAGE,
 ]

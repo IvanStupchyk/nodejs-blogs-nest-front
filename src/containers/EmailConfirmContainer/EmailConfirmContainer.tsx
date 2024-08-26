@@ -8,7 +8,7 @@ import EmailConfirmPopup from "../../components/EmailConfirmPopup/EmailConfirmPo
 import ConfirmCode from "../../components/ConfirmCode/ConfirmCode";
 
 const EmailConfirmContainer = () => {
-    const [confirmEmail, { status,isSuccess, error }] = useEmailConfirmMutation()
+    const [confirmEmail, { status,isSuccess }] = useEmailConfirmMutation()
     const [resendConfirmCode] = useResendConfirmCodeMutation()
 
     const [openRegistrationPopup, setOpenRegistrationPopup] = React.useState(true);
